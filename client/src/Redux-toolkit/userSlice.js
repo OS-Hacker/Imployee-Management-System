@@ -28,7 +28,7 @@ export const api = createApi({
     // Get a single user by ID
     getUserById: builder.query({
       query: (id) => `/api/v1/${id}`,
-      invalidatesTags: ["User"],
+      providesTags: ["User"],
     }),
 
     // Update an existing user

@@ -17,23 +17,23 @@ const EditUser = ({ editMode, setEditMode, id, theme }) => {
   });
 
   // RTK Query hooks
-  const { data } = useGetUserByIdQuery(id);
+  const { data, refetch } = useGetUserByIdQuery(id);
   const [updateUser, { isLoading }] = useUpdateUserMutation();
 
   // Populate form data when the user data is fetched
- useEffect(() => {
-   if (editMode && data) {
-     setUserFormData({
-       name: data?.user?.name || "",
-       age: data?.user?.age || "",
-       email: data?.user?.email || "",
-       number: data?.user?.number || "",
-       department: data?.user?.department || "",
-       profileImage: data?.user?.profileImage || "",
-       profileImagePreview: data?.user?.profileImage || "",
-     });
-   }
- }, [editMode, data]);
+  useEffect(() => {
+    if (editMode && data) {
+      setUserFormData({
+        name: data?.user?.name || "",
+        age: data?.user?.age || "",
+        email: data?.user?.email || "",
+        number: data?.user?.number || "",
+        department: data?.user?.department || "",
+        profileImage: data?.user?.profileImage || "",
+        profileImagePreview: data?.user?.profileImage || "",
+      });
+    }
+  }, [editMode, data]);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -80,9 +80,10 @@ const EditUser = ({ editMode, setEditMode, id, theme }) => {
     profileImage && formData.append("profileImage", profileImage);
 
     try {
-     const response = await updateUser({ id, formData }).unwrap();
+      const response = await updateUser({ id, formData }).unwrap();
       toast.success(response?.msg, { position: "top-center" });
       setEditMode(false);
+      refetch()
     } catch (error) {
       toast.error(error?.data?.msg || "Failed to update user", {
         position: "top-center",
@@ -136,7 +137,7 @@ const EditUser = ({ editMode, setEditMode, id, theme }) => {
                     type="text"
                     className="w-full p-2 border rounded"
                     name="name"
-                    value={userFormData.name}
+                    value={userFormData?.name}
                     onChange={handleChange}
                     required
                   />
@@ -150,7 +151,7 @@ const EditUser = ({ editMode, setEditMode, id, theme }) => {
                       type="number"
                       className="w-full p-2 border rounded"
                       name="age"
-                      value={userFormData.age}
+                      value={userFormData?.age}
                       onChange={handleChange}
                       placeholder="Enter your age"
                       min="0"
@@ -165,7 +166,7 @@ const EditUser = ({ editMode, setEditMode, id, theme }) => {
                     <select
                       className="w-full p-2 border rounded"
                       name="department"
-                      value={userFormData.department}
+                      value={userFormData?.department}
                       onChange={handleChange}
                     >
                       <option value="" hidden>
@@ -206,7 +207,7 @@ const EditUser = ({ editMode, setEditMode, id, theme }) => {
                     type="email"
                     className="w-full p-2 border rounded"
                     name="email"
-                    value={userFormData.email}
+                    value={userFormData?.email}
                     onChange={handleChange}
                     required
                   />
@@ -219,7 +220,7 @@ const EditUser = ({ editMode, setEditMode, id, theme }) => {
                     type="number"
                     className="w-full p-2 border rounded"
                     name="number"
-                    value={userFormData.number}
+                    value={userFormData?.number}
                     onChange={handleChange}
                     required
                   />
