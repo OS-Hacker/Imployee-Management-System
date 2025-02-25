@@ -16,12 +16,13 @@ const Home = () => {
     per_page,
   });
 
+  console.log(data)
 
-  console.log(isLoading)
 
   // Extract users and total pages from the API response
   const users = data?.users || [];
-  const totalPages = data?.totalPages || 1;
+  const totalPages = data?.pagination.totalPages || 1;
+
 
   // Handle errors
   if (isError) {

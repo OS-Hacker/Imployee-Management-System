@@ -80,8 +80,8 @@ const EditUser = ({ editMode, setEditMode, id, theme }) => {
     profileImage && formData.append("profileImage", profileImage);
 
     try {
-      await updateUser({ id, formData }).unwrap();
-      toast.success("User successfully updated!", { position: "top-center" });
+     const response = await updateUser({ id, formData }).unwrap();
+      toast.success(response?.msg, { position: "top-center" });
       setEditMode(false);
     } catch (error) {
       toast.error(error?.data?.msg || "Failed to update user", {

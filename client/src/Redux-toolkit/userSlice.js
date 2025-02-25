@@ -28,7 +28,7 @@ export const api = createApi({
     // Get a single user by ID
     getUserById: builder.query({
       query: (id) => `/api/v1/${id}`,
-      providesTags: (result, error, id) => [{ type: "User", id }],
+      invalidatesTags: ["User"],
     }),
 
     // Update an existing user
@@ -38,7 +38,7 @@ export const api = createApi({
         method: "PUT",
         body: formData,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: "User", id }],
+      invalidatesTags: ["User"],
     }),
 
     // Delete a user
@@ -47,7 +47,7 @@ export const api = createApi({
         url: `/api/v1/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, id) => [{ type: "User", id }],
+      invalidatesTags: ["User"],
     }),
   }),
 });

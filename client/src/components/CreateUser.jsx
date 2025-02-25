@@ -52,8 +52,8 @@ const CreateUser = ({ showModal, setShowModal, theme }) => {
     formData.append("number", number);
     formData.append("department", department);
     try {
-      await createUser(formData).unwrap();
-      toast.success("User created successfully!", { position: "top-center" });
+      const response = await createUser(formData).unwrap();
+      toast.success(response?.msg, { position: "top-center" });
       setShowModal(false);
       setUserFormData({
         profileImage: "",
@@ -65,7 +65,9 @@ const CreateUser = ({ showModal, setShowModal, theme }) => {
       });
       setProfileImagePreview("");
     } catch (error) {
-      toast.error("Failed to create user", { position: "top-center" });
+      toast.error(error?.data?.msg, {
+        position: "top-center",
+      });
     }
   };
 

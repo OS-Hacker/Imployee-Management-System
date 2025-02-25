@@ -37,11 +37,11 @@ const Table = ({
   // Delete user
   const handleDelete = async (id) => {
     try {
-      await deleteUser(id).unwrap();
-      toast.success("User deleted successfully!", { position: "top-center" });
+     const response = await deleteUser(id).unwrap();
+      toast.success(response?.msg, { position: "top-center" });
     } catch (error) {
-      toast.error("Failed to delete user", { position: "top-center" });
       console.error(error);
+      toast.error(error?.data?.msg, { position: "top-center" });
     }
   };
 

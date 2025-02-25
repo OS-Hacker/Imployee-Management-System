@@ -1,6 +1,10 @@
 import React from "react";
 
 const Pagination = ({ page, setPage, totalPages, data }) => {
+
+
+
+  console.log(data)
   // If there are no users, don't render the pagination
   if (data.length === 0) return null;
 

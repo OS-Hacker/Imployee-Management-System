@@ -58,7 +58,7 @@ const createUserController = async (req, res) => {
     res.status(500).send({
       success: false,
       msg: "Error creating user",
-      error: error.msg,
+      error,
     });
   }
 };
@@ -103,7 +103,8 @@ const SearchAndPaginationController = async (req, res) => {
     const users = await userModel
       .find(query)
       .skip((pageNumber - 1) * perPageNumber)
-      .limit(perPageNumber);
+      .limit(perPageNumber)
+      .sort({ updatedAt: -1 });
 
     res.status(200).send({
       success: true,
@@ -120,7 +121,7 @@ const SearchAndPaginationController = async (req, res) => {
     res.status(500).send({
       success: false,
       msg: "Error fetching users",
-      error: error.msg, // Use error.message instead of error.msg
+      error, // Use error.message instead of error.msg
     });
   }
 };
@@ -147,7 +148,7 @@ const getSingleUserController = async (req, res) => {
     res.status(500).send({
       success: false,
       msg: "Error fetching user",
-      error: error.message,
+      error,
     });
   }
 };
@@ -222,7 +223,7 @@ const updateUserController = async (req, res) => {
     res.status(500).send({
       success: false,
       msg: "Error updating user",
-      error: error.msg,
+      error,
     });
   }
 };
@@ -252,7 +253,7 @@ const deleteUserController = async (req, res) => {
     res.status(500).send({
       success: false,
       msg: "Error deleting user",
-      error: error.msg,
+      error,
     });
   }
 };
