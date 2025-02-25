@@ -1,0 +1,23 @@
+{
+  "name": "ejs-curd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon App.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cloudinary": "^2.5.1",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-formidable": "^1.2.0",
+    "mongoose": "^8.10.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.9"
+  }
+}
